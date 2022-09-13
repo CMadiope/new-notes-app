@@ -1,8 +1,8 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import Note from "./Note";
 import React from 'react'
 import { v4 as uuid } from "uuid";
-
+import Createnote from "./Createnote";
 
 const Notes = () => {
 
@@ -30,6 +30,14 @@ const deleteNote = (id) => {
   });
   setNotes(filteredNotes)
 }
+
+useEffect(() => {
+  localStorage.setItem('Notes', JSON.stringify(notes))
+}, [notes])
+useEffect(() => {
+  const data=JSON.parse(localStorage.getItem('Notes'));
+  setNotes(data)
+}, [])
 
   return (
     <div className="Notes">
